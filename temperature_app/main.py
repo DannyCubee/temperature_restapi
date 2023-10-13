@@ -21,7 +21,9 @@ def get_db():
 
 @app.get("/hello")
 def read_root() -> dict:
-    return {"Nachricht": "Ich lieb dich"}
+    return {"Nachricht": "Ich lieb dich",
+            "Nachricht2": "Hallo, ich bin ReST",
+            "Nachricht3": "Hallo, ich bin ein Pi"}
 
 
 @app.post("/new_value")
