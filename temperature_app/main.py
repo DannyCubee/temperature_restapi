@@ -19,11 +19,26 @@ def get_db():
     finally:
         db.close()
 
+
 @app.get("/hello")
 def read_root() -> dict:
     return {"Nachricht": "Ich lieb dich"}
 
 
-@app.post("/new_value")
-def create_value(temp_id: int, item: schemas.Temperatures, db: Session = Depends(get_db)):
-    return crud.create_reading(db=db, temperature=item), temp_id
+@app.post("/api/v1/new")
+def create_value(item: schemas.Temperatures, db: Session = Depends(get_db)):
+    return crud.create_reading(db, item)
+
+
+@app.get("/api/v1/{id}", response_model=schemas.Temperatures)
+def get_value(id: int, db: Session = Depends(get_db)):
+    return crud.get_reading(db, id)
+
+
+@app.put("/api/v1/update")
+def update_value(id: int, temp_c: int, temp_f: int, db: Session = Depends(get_db)):
+    return crud.update_reading(db, id, temp_c, temp_f)
+
+@app.delete("/api/v1/delete")
+def delete_value(id: int, db: Session = Depends(get_db)):
+    return crud.delete_reading(db, id)
