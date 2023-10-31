@@ -25,12 +25,12 @@ def read_root() -> dict:
     return {"Nachricht": "Ich lieb dich"}
 
 
-@app.post("/api/v1/new")
+@app.post("/api/v1/new-temperature")
 def create_value(item: schemas.Temperatures, db: Session = Depends(get_db)):
     return crud.create_reading(db, item)
 
 
-@app.get("/api/v1/{id}", response_model=schemas.Temperatures)
+@app.get("/api/v1/temperatures/{id}", response_model=schemas.Temperatures)
 def get_value(id: int, db: Session = Depends(get_db)):
     return crud.get_reading(db, id)
 
