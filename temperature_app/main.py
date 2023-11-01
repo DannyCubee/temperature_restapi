@@ -51,3 +51,5 @@ def delete_value(id: int, db: Session = Depends(get_db)):
 def get_all_values(skip: int, limit: int, db: Session = Depends(get_db)):
     return crud.get_all_readngs(db, skip, limit)
 
+# test
+
