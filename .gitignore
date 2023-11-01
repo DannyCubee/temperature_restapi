@@ -1,1 +1,3 @@
 .rpi_rest_env
+temperature_app/__pycache__
+.env

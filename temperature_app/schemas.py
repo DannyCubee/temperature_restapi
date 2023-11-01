@@ -6,3 +6,7 @@ class Temperatures(BaseModel):
     temp_c: float
     temp_f: float
 
+class CreateTemp(BaseModel):
+    temp_c: float
+    temp_f: float
+
