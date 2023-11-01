@@ -5,7 +5,7 @@ from . import models
 from . import schemas
 
 
-def create_reading(db: Session, temperature: schemas.Temperatures):
+def create_reading(db: Session, temperature: schemas.CreateTemp):
     new_temp = models.Temperature(**temperature.model_dump())
     db.add(new_temp)
     db.commit()
@@ -34,3 +34,8 @@ def delete_reading(db: Session, id: int):
     db.commit()
 
     return {"msg": f"Dataset with ID:{id} deleted"}
+
+
+def get_all_readngs(db: Session, skip: int, limit: int):
+    items = db.query(models.Temperature).offset(skip).limit(limit).all()
+    return items

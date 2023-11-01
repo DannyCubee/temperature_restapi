@@ -28,7 +28,7 @@ def read_root() -> dict:
 
 
 @app.post("/api/v1/new-temperature")
-def create_value(item: schemas.Temperatures, db: Session = Depends(get_db)):
+def create_value(item: schemas.CreateTemp, db: Session = Depends(get_db)):
     return crud.create_reading(db, item)
 
 
@@ -41,6 +41,13 @@ def get_value(id: int, db: Session = Depends(get_db)):
 def update_value(id: int, temp_c: int, temp_f: int, db: Session = Depends(get_db)):
     return crud.update_reading(db, id, temp_c, temp_f)
 
+
 @app.delete("/api/v1/delete")
 def delete_value(id: int, db: Session = Depends(get_db)):
     return crud.delete_reading(db, id)
+
+
+@app.get("/api/v1/all-items")
+def get_all_values(skip: int, limit: int, db: Session = Depends(get_db)):
+    return crud.get_all_readngs(db, skip, limit)
+
